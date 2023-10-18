@@ -40,6 +40,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcm5lclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/C\#/LT_WEB/Lab2/Lab2/Views/Learner/LearnerTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGVhcm5lclxMZWFybmVyVGFibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/C\#/LT_WEB/Lab2/Lab2/Views/Shared/Components/Major/RenderMajor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWFqb3JcUmVuZGVyTWFqb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/C\#/LT_WEB/Lab2/Lab2/Views/Shared/Components/Render/RenderLeftMenu.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcUmVuZGVyXFJlbmRlckxlZnRNZW51LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
