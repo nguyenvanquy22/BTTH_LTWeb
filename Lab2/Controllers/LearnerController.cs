@@ -10,6 +10,7 @@ namespace Lab2.Controllers
     public class LearnerController : Controller
     {
         private SchoolContext db;
+        int pageSize = 2;
 
         public LearnerController(SchoolContext context)
         {
@@ -17,19 +18,22 @@ namespace Lab2.Controllers
         }
         public IActionResult Index(int? mid)
         {
-            if (mid == null)
+            var learners = (IQueryable<Learner>)db.Learners
+                .Include(m => m.Major);
+
+            if (mid != null)
             {
-                var learners = db.Learners
-                    .Include(m => m.Major).ToList(); 
-                return View(learners);
+                learners = (IQueryable<Learner>)db.Learners
+                    .Where(l => l.MajorID == mid)
+                    .Include(m => m.Major);
             }
-            else
-            {
-                var learners = db.Learners
-                    .Where(m => m.MajorID == mid)
-                    .Include(m => m.Major).ToList();
-                return View(learners);
-            }
+
+            int pageNumber = (int)Math.Ceiling(learners.Count() / (float)pageSize);
+            ViewBag.PageNum = pageNumber;
+
+            var result = learners.Take(pageSize).ToList();
+            return View(result);
+
         }
         public IActionResult LearnerByMajorID(int mid)
         {
@@ -160,5 +164,34 @@ namespace Lab2.Controllers
             db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult LearnerFilter(int? mid, string? keyword, int? pageIndex)
+        {
+            var learners = (IQueryable<Learner>)db.Learners;
+
+            int page = (int)(pageIndex == null || pageIndex <= 0 ? 1 : pageIndex);
+
+            if (mid != null)
+            {
+                learners = learners.Where(l => l.MajorID == mid);
+                ViewBag.Mid = mid;
+            }
+
+            if (keyword != null)
+            {
+                learners = learners.Where(l => l.FirstMidName.ToLower().Contains(keyword.ToLower()));
+                ViewBag.Keyword = keyword;
+            }
+
+            int pageNum = (int)Math.Ceiling(learners.Count() / (float)pageSize);
+
+            ViewBag.PageNum = pageNum;
+
+            var result = learners.Skip(pageSize * (page - 1))
+                        .Take(pageSize).Include(m => m.Major);  
+           
+            return PartialView("LearnerTable", result);
+        }
+
     }
 }

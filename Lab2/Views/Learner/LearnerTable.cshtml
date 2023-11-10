@@ -30,3 +30,25 @@
             }
         </tbody>
     </table>
+<ul class="pagination">
+    @* <li class="page-item">
+    <a class="page-link" id="prevPage" href="#" aria-label="Previous">
+    <span aria-hidden="true">&laquo;</span>
+    <span class="sr-only">Previrous</span>
+    </a>
+    </li> *@
+    @for (var i = 1; i <= ViewBag.PageNum; i++)
+    {
+        <li class="page-item" page="@i"
+        @(ViewBag.Mid != null ? "mid=" + ViewBag.Mid : "")
+        @(ViewBag.KeyWord != null ? "keyword=" + ViewBag.Keyword : "") >
+            <a class="page-link" href="#">@i</a>
+        </li>
+    }
+    @* <li class="page-item">
+    <a class="page-link" id="nextPage" href="#" aria-label="Next">
+    <span aria-hidden="true">&raquo;</span>
+    <span class="sr-only">Next</span>
+    </a>
+    </li> *@
+</ul>
